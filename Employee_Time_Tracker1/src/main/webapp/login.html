@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .login-container h1, .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container button, .login-container select {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .default-button {
+            background-color: #008CBA;
+            color: white;
+        }
+        .login-container button:hover, .login-container select:hover {
+            opacity: 0.8;
+        }
+        .login-container select {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-form button {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login Page</h1>
+        <select id="loginOptions" onchange="changeLoginOption()">
+            <option value="" selected disabled>Select Login Option</option>
+            <option value="Employee">Employee Login</option>
+            <option value="Admin">Admin Login</option>
+            <option value="Ass">Ass Login</option>
+        </select>
+        <form class="login-form" id="loginForm" method="post">
+            <h2 id="formTitle">Login</h2>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="submit" class="default-button">Login</button>
+        </form>
+    </div>
+    <script>
+        function changeLoginOption() {
+            const loginOption = document.getElementById('loginOptions').value;
+            const loginForm = document.getElementById('loginForm');
+            const formTitle = document.getElementById('formTitle');
+            const usernameField = document.getElementById('username');
+            const passwordField = document.getElementById('password');
+
+            if (loginOption === "Employee") {
+                loginForm.action = "LoginServlet";
+                formTitle.innerText = "Employee Login";
+                usernameField.name = "empid";
+                usernameField.placeholder = "Employee ID";
+            } else if (loginOption === "Admin") {
+                loginForm.action = "AdminLoginServlet";
+                formTitle.innerText = "Admin Login";
+                usernameField.name = "username";
+                usernameField.placeholder = "Username";
+            } else if (loginOption === "Ass") {
+                loginForm.action = "AssLoginServlet";
+                formTitle.innerText = "Ass Login";
+                usernameField.name = "username";
+                usernameField.placeholder = "Username";
+            }
+        }
+    </script>
+</body>
+</html>
